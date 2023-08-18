@@ -628,12 +628,32 @@ onUnmounted(() => {
           :class="[isMobile ? 'p-2' : 'p-4']"
         >
           <NSpin :show="firstLoading">
-            <template v-if="!dataSources.length">
-              <div class="flex items-center justify-center mt-4 text-center text-neutral-300">
-                <SvgIcon icon="ri:bubble-chart-fill" class="mr-2 text-3xl" />
-                <span>Aha~</span>
-              </div>
-            </template>
+              
+              
+<template v-if="!dataSources.length">
+  <div class="flex items-center justify-center mt-4 mb-20 text-center text-neutral-300">
+    <SvgIcon icon="ri:bubble-chart-fill" class="mr-2 text-3xl" />
+    <span>Aha~</span>
+  </div>
+  <div class="flex h-full text-neutral-600 justify-center">
+    <div class="text-left">
+      <span class="mb-4 font-bold"><br/>以下为各模型的能力及特点：<br/></span>
+      <ul class="list-disc list-inside">
+        <li>gpt-4/gpt-4-4k：默认模型，适合日常使用。</li>
+        <li>gpt-4-32k：在普通gpt-4模型的基础上，有更长的上下文记录长度，最长能记录约2万字以上。</li>
+        <li>gpt-3.5-turbo：最普通的ChatGPT模型，回复速度快，能力一般。</li>
+        <li>net-gpt：能够联网搜索资料的ChatGPT，需要联网搜索时候可尝试使用。</li>
+        <li>claude-2-100k：优点是能记录上万字的超长上下文。</li>
+      </ul>
+      <span class="mt-4 font-bold"><br/>使用过程中有任何疑问，请钉钉@苏云凯，将在第一时间为您解决问题。</span>
+    </div>
+  </div>
+</template>
+
+
+
+
+
             <template v-else>
               <div>
                 <Message
