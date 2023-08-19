@@ -63,32 +63,32 @@ export async function initApi(key: KeyConfig, chatModel: CHATMODEL) {
     else if (model.toLowerCase().includes('32k')) {
       // If it's a '32k' model, set the maxModelTokens to 32768 and maxResponseTokens to 8192
       options.maxModelTokens = 32000
-      options.maxResponseTokens = 8192
+      options.maxResponseTokens = 4096
     }
     else if (model.toLowerCase().includes('2k')) {
       // If it's a '8k' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
-      options.maxModelTokens = 2300
-      options.maxResponseTokens = 1000
+      options.maxModelTokens = 4000
+      options.maxResponseTokens = 1650
     }
     else if (model.toLowerCase().includes('8k')) {
       // If it's a '8k' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
       options.maxModelTokens = 8000
-      options.maxResponseTokens = 2048
+      options.maxResponseTokens = 1500
     }
     else if (model.toLowerCase().includes('gpt-4')) {
       // If it's a '8k' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
       options.maxModelTokens = 8000
-      options.maxResponseTokens = 2048
+      options.maxResponseTokens = 1500
     }
     else if (model.toLowerCase().includes('cluade')) {
       // If it's a 'gpt-4' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
-      options.maxModelTokens = 90000
+      options.maxModelTokens = 100000
       options.maxResponseTokens = 10000
     }
     else {
       // If none of the above, use the default values, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
       options.maxModelTokens = 4000
-      options.maxResponseTokens = 1200
+      options.maxResponseTokens = 1024
     }
 
     if (isNotEmptyString(OPENAI_API_BASE_URL))
