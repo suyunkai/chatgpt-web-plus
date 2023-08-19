@@ -639,8 +639,9 @@ onUnmounted(() => {
     <div class="text-left">
       <span class="mb-4 font-bold"><br/>以下为各模型的能力及特点：<br/></span>
       <ul class="list-disc list-inside">
-        <li>gpt-4/gpt-4-4k：默认模型，适合日常使用。</li>
-        <li>gpt-4-32k：在普通gpt-4模型的基础上，有更长的上下文记录长度，最长能记录约2万字以上。</li>
+        <li>gpt-4：默认模型，适合日常使用。</li>
+        <li>gpt-4-2k/4k：上下文长度更短，gpt-4不可用时会将默认模型换成这两个。</li>
+        <li>gpt-4-32k：上下文长度更长，最长能记录约2万字以上。</li>
         <li>gpt-3.5-turbo：最普通的ChatGPT模型，回复速度快，能力一般。</li>
         <li>net-gpt：能够联网搜索资料的ChatGPT，需要联网搜索时候可尝试使用。</li>
         <li>claude-2-100k：优点是能记录上万字的超长上下文。</li>
