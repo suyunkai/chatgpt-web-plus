@@ -65,13 +65,18 @@ export async function initApi(key: KeyConfig, chatModel: CHATMODEL) {
       options.maxModelTokens = 32000
       options.maxResponseTokens = 8192
     }
-    else if (model.toLowerCase().includes('4k')) {
-      // If it's a '4k' model, set the maxModelTokens and maxResponseTokens to 4096 and 1200 respectively
-      options.maxModelTokens = 4000
-      options.maxResponseTokens = 1200
+    else if (model.toLowerCase().includes('2k')) {
+      // If it's a '8k' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
+      options.maxModelTokens = 2300
+      options.maxResponseTokens = 1000
+    }
+    else if (model.toLowerCase().includes('8k')) {
+      // If it's a '8k' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
+      options.maxModelTokens = 8000
+      options.maxResponseTokens = 2048
     }
     else if (model.toLowerCase().includes('gpt-4')) {
-      // If it's a 'gpt-4' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
+      // If it's a '8k' model, set the maxModelTokens and maxResponseTokens to 8192 and 2048 respectively
       options.maxModelTokens = 8000
       options.maxResponseTokens = 2048
     }
