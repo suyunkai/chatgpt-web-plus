@@ -163,16 +163,17 @@ async function chatReplyProcess(options: RequestOptions) {
 
     return sendResponse({ type: 'Success', data: response })
   }
-  catch (error: any) {
-    const code = error.statusCode
-    if (code === 429 && (error.message.includes('Too Many Requests') || error.message.includes('Rate limit'))) {
-      // access token  Only one message at a time
-      if (options.tryCount++ < 3) {
-        _lockedKeys.push({ key: key.key, lockedTime: Date.now() })
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        return await chatReplyProcess(options)
-      }
-    }
+ catch (error: any) {
+   const code = error.statusCode
+   if ((code === 429 || code === 401 || code === 403 || code === 502 || code === 503 || code === 504 || code === 500)
+     && (error.message.includes('Too Many Requests') || error.message.includes('Rate limit') || ErrorCodeMessage[code])) {
+     // access token  Only one message at a time
+     if (options.tryCount++ < 3) {
+       _lockedKeys.push({ key: key.key, lockedTime: Date.now() })
+       await new Promise(resolve => setTimeout(resolve, 2000))
+       return await chatReplyProcess(options)
+     }
+   }
     global.console.error(error)
     if (Reflect.has(ErrorCodeMessage, code))
       return sendResponse({ type: 'Fail', message: ErrorCodeMessage[code] })
