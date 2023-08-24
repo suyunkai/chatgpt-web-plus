@@ -165,7 +165,7 @@ async function chatReplyProcess(options: RequestOptions) {
   }
  catch (error: any) {
    const code = error.statusCode
-   if ((code === 429 || code === 401 || code === 403 || code === 502 || code === 503 || code === 504 || code === 500)
+   if ((code === 429 || code === 403 || code === 502 || code === 503 || code === 504 || code === 500)
      && (error.message.includes('Too Many Requests') || error.message.includes('Rate limit') || ErrorCodeMessage[code])) {
      // access token  Only one message at a time
      if (options.tryCount++ < 3) {
