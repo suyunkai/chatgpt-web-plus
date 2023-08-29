@@ -102,10 +102,10 @@ export function fetchResetPassword<T = any>(username: string, password: string, 
   })
 }
 
-export function fetchRegister<T = any>(username: string, password: string) {
+export function fetchRegister<T = any>(username: string, password: string, description: string) {
   return post<T>({
     url: '/user-register',
-    data: { username, password },
+    data: { username, password, description },
   })
 }
 
