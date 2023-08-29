@@ -201,9 +201,11 @@ export async function deleteChat(roomId: number, uuid: number, inversion: boolea
   await chatCol.updateOne(query, update)
 }
 
-export async function createUser(email: string, password: string, roles?: UserRole[]): Promise<UserInfo> {
+export async function createUser(email: string, password: string, description: string, roles?: UserRole[]): Promise<UserInfo> {
   email = email.toLowerCase()
   const userInfo = new UserInfo(email, password)
+  // 在创建 userInfo 对象后，为其 description 属性赋值
+  userInfo.description = description
   if (roles && roles.includes(UserRole.Admin))
     userInfo.status = Status.Normal
   userInfo.roles = roles
