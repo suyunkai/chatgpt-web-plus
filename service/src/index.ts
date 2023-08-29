@@ -493,7 +493,7 @@ router.post('/chat-abort', [auth, limiter], async (req, res) => {
 
 router.post('/user-register', authLimiter, async (req, res) => {
   try {
-    const { username, password } = req.body as { username: string; password: string }
+    const { username, password, description } = req.body as { username: string; password: string; description: string }
     const config = await getCacheConfig()
     if (!config.siteConfig.registerEnabled) {
       res.send({ status: 'Fail', message: '注册账号功能未启用 | Register account is disabled!', data: null })
@@ -531,7 +531,7 @@ router.post('/user-register', authLimiter, async (req, res) => {
     }
     const newPassword = md5(password)
     const isRoot = username.toLowerCase() === process.env.ROOT_USER
-    await createUser(username, newPassword, isRoot ? [UserRole.Admin] : [UserRole.User])
+    await createUser(username, newPassword, description, isRoot ? [UserRole.Admin] : [UserRole.User])
 
     if (isRoot) {
       res.send({ status: 'Success', message: '注册成功 | Register success', data: null })
