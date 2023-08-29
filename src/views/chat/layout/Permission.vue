@@ -10,7 +10,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
+const description = ref('')
 const emit = defineEmits<Emit>()
 
 interface Emit {
@@ -221,6 +221,7 @@ async function handleResetPassword() {
 
           <NTabPane v-if="authStore.session && authStore.session.allowRegister" name="register" :tab="$t('common.register')">
             <NInput v-model:value="username" type="text" :placeholder="$t('common.email')" class="mb-2" />
+            <NInput v-model:value="description" type="text" :placeholder="$t('真实姓名')" class="mb-2" />
             <NInput v-model:value="password" type="password" :placeholder="$t('common.password')" class="mb-2" @input="handlePasswordInput" />
             <NInput
               v-if="showConfirmPassword"
