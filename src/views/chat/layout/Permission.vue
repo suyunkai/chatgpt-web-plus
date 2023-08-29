@@ -144,7 +144,7 @@ async function handleRegister() {
 
   try {
     loading.value = true
-    const result = await fetchRegister(name, pwd，description.value)
+    const result = await fetchRegister(name, pwd, description.value)
     ms.success(result.message as string)
   }
   catch (error: any) {
