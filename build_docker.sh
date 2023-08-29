@@ -1,5 +1,5 @@
 
-VERSION=1.0.1
+VERSION=1.0.5
 
 # 显示版本号并获取用户确认
 read -p "版本号是 ${VERSION}，是否确认？(y/n)" -n 1 -r
